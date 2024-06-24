@@ -5,50 +5,20 @@
 }
 
 :root {
-  /* Light Mode */
-  --color-hue: 0;
-  --color-bg: hsl(var(--color-hue), 5%, 7%);
-  --color-text: hsl(var(--color-hue), 40%, 90%);
-  --color-primary: hsl(var(--color-hue), 100%, 63%);
-  --color-controls-bg: hsl(var(--color-hue), 0%, 14%);
-  --color-button-secondary: hsl(var(--color-hue), 40%, 90%);
+  /* New Mode */
+  --color-bg: #fff;
+  --color-text: #323238;
+  --color-primary: var(--color2-text);
+  --color-bg-btn: #e1e1e6;
+  --color-bg-btn-hover: #1fabd6;
+  --color-bg-btn-selected: #02799d;
 
   font-size: clamp(40%, 1%+2vw, 62.5%);
 }
 
-/* Configuração Light Mode */
-html.light {
-  --color-bg: hsl(var(--color-hue), 40%, 90%);
-  --color-text: hsl(var(--color-hue), 5%, 7%);
-  --color-controls-bg: hsl(var(--color-hue), 0%, 14%);
-}
-
-html.light .ph-sun,
-html:not(.light) .ph-moon {
-  display: none;
-}
-
-#toggle-mode {
-  position: absolute;
-  top: 3.2rem;
-  right: 3.2rem;
-  font-size: 3.2rem;
-  line-height: 0;
-
-  color: var(--color-text);
-}
-
-/* Screen Reader Only - Acessibilidade */
-.sr-only {
-  width: 1px;
-  height: 1px;
-  position: absolute;
-  overflow: hidden;
-
-  margin: -1px;
-  padding: 0px;
-  border: 0px;
-  appearance: none;
+body,
+button {
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -60,50 +30,168 @@ body {
   place-content: center;
 }
 
-app {
-  display: grid;
-  justify-items: center;
-}
-
-.flex {
+#app {
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 33.6rem;
+  width: 82.1rem;
   justify-content: center;
+  align-items: center;
 }
 
-#timer {
-  font-size: 9.6rem;
-  font-weight: bold;
-  font-family: "Roboto", sans-serif;
+#timerDisplay {
+  font-size: 12.62rem;
+  font-weight: medium;
 }
 
-#controls {
-  background-color: var(--color-controls-bg);
-  border-radius: 999rem;
-  margin-top: 1.6rem;
-  padding: 2.2rem 4rem;
-  gap: 1.6rem;
+#controlsTimer {
+  display: flex;
+  gap: 4rem;
 }
 
-button {
+#controlsTimer button {
   background-color: transparent;
-  color: var(--color-primary);
+  color: var(--color-text);
   border: 0;
 
   cursor: pointer;
 
-  font-size: 6.4rem;
+  font-size: 4.8rem;
 }
 
-.secondary {
-  color: var(--color-button-secondary);
+#controlsMusic {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 32rem;
+  row-gap: 3.2rem;
+  column-gap: 3.2rem;
+
+  justify-content: center;
 }
 
-/* Controls */
+#controlsMusic button {
+  background-color: var(--color-bg-btn);
+  color: var(--color-text);
+  border: 0;
+  border-radius: 2.4rem;
+
+  cursor: pointer;
+
+  width: 13.8rem;
+  height: 15.2rem;
+}
+
+#controlsMusic button:hover {
+  background-color: var(--color-bg-btn-hover);
+  opacity: 0.8;
+}
+
+#controlsMusic button img {
+  background-color: transparent;
+  color: var(--color-text);
+  height: 5.6rem;
+}
+
+#controlsMusic button.selected {
+  background-color: var(--color-bg-btn-selected);
+}
+
+/* Buttons */
+#card1,
+#card2,
+#card3,
+#card4 {
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 5.2rem;
+}
+
+#card1 {
+  background-image: url(./assets/card1.svg);
+}
+
+#card1.selected {
+  background-image: url(./assets/card1w.svg);
+}
+
+#card2 {
+  background-image: url(./assets/card2.svg);
+}
+
+#card2.selected {
+  background-image: url(./assets/card2w.svg);
+}
+
+#card3 {
+  background-image: url(./assets/card3.svg);
+}
+
+#card3.selected {
+  background-image: url(./assets/card3w.svg);
+}
+
+#card4 {
+  background-image: url(./assets/card4.svg);
+}
+
+#card4.selected {
+  background-image: url(./assets/card4w.svg);
+}
+
+/* Controladores da aplicação */
 .running .ph-play-circle,
-.running .ph-timer,
-.music-on .ph-speaker-none,
-html:not(.running) .ph-pause-circle,
-html:not(.running) .ph-stop-circle,
-html:not(.music-on) .ph-speaker-high {
+html:not(.running) .ph-pause-circle {
   display: none;
+}
+
+/* Classes auxiliares */
+.sr-only {
+  /* Screen Reader Only  */
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  overflow: hidden;
+
+  margin: -1px;
+  padding: 0px;
+  border: 0px;
+  appearance: none;
+}
+
+@media (width < 1300px) {
+  #app {
+    height: 100vh;
+    width: 33.6rem;
+    flex-direction: row;
+    margin-top: 2rem 0;
+  }
+
+  #controlsMusic {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (width < 60px) {
+}
+
+/* Animation */
+.blinkDotz {
+  animation: blink-animation 0.8s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes -webkit-blink-animation {
+  to {
+    visibility: hidden;
+  }
 }

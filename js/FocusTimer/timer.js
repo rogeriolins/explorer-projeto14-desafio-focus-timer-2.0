@@ -1,7 +1,7 @@
 import state from "./states.js"
 import * as el from "./elements.js"
-import { reset } from "./actions.js"
 import { kitchenTimer } from "./sound.js"
+import { reset } from "./actions.js"
 
 export function countdown() {
   clearTimeout(state.countdownId)
